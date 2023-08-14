@@ -12,7 +12,6 @@ declare module '@vue/runtime-core' {
     Card: typeof import('./src/components/Card.vue')['default']
     FormField: typeof import('./src/components/FormField.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     Loader: typeof import('./src/components/Loader.vue')['default']
     RenderCards: typeof import('./src/components/RenderCards.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

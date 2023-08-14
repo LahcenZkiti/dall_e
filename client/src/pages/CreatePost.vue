@@ -25,13 +25,16 @@ const generateImage = async () => {
   if (form.value.prompt) {
     try {
       generatingImg.value = true;
-      const response = await fetch("http://localhost:8080/api/v1/dalle", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ prompt: form.value.prompt }),
-      });
+      const response = await fetch(
+        "https://dall-e-yvel.onrender.com/api/v1/dalle",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ prompt: form.value.prompt }),
+        }
+      );
 
       const data = await response.json();
 
@@ -51,13 +54,16 @@ const handleSubmit = async () => {
   if (form.value.prompt && form.value.photo) {
     try {
       loading.value = true;
-      const response = await fetch("http://localhost:8080/api/v1/post", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form.value),
-      });
+      const response = await fetch(
+        "https://dall-e-yvel.onrender.com/api/v1/post",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(form.value),
+        }
+      );
 
       await response.json();
       router.push({ name: "home" });

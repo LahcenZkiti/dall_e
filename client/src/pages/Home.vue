@@ -13,12 +13,15 @@ const fetchPosts = async () => {
   loading.value = true;
 
   try {
-    const response = await fetch("http://localhost:8080/api/v1/post", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      "https://dall-e-yvel.onrender.com/api/v1/post",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     if (response.ok) {
       const result = await response.json();
@@ -33,18 +36,14 @@ const fetchPosts = async () => {
 };
 
 const handleSearchChange = (e) => {
-  clearTimeout(searchTimeout);
-  console.log("event", e.target.value);
   searchText.value = e.target.value;
 
-  searchTimeout.value = setTimeout(() => {
-    const searchResults =
-      allPosts.value.filter((item) =>
-        item.name.toLowerCase().includes(searchText.value.toLowerCase())
-      ) || item.prompt.toLowerCase().includes(searchText.value.toLowerCase());
+  const searchResults =
+    allPosts.value.filter((item) =>
+      item.name.toLowerCase().includes(searchText.value.toLowerCase())
+    ) || item.prompt.toLowerCase().includes(searchText.value.toLowerCase());
 
-    searchedResults.value = searchResults;
-  }, 500);
+  searchedResults.value = searchResults;
 };
 
 onMounted(() => {
@@ -91,7 +90,11 @@ onMounted(() => {
               searchedResults.length === 0 ? 'No Search Results Found' : ''
             "
           />
-          <RenderCards v-else :data="allPosts" title="" />
+          <RenderCards
+            v-else
+            :data="allPosts"
+            :title="allPosts.length === 0 ? 'No Posts Yet' : ''"
+          />
         </div>
       </template>
     </div>
